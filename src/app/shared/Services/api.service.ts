@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +38,20 @@ export class ApiService {
 
   accionValor(Accion: string) {
     return Accion != '' ? `/${Accion}` : '';
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/logout`, {}).pipe(
+      tap(() => {
+        // Si la petición es exitosa, elimina los datos almacenados en localStorage
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        console.log('Sesión cerrada y datos eliminados del localStorage.');
+      }),
+      catchError((error) => {
+        console.error('Error al cerrar sesión:', error);
+        throw error;
+      })
+    );
   }
 }

@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#ebf5fb] to-[#ffffff]">
+  <div class="card shadow-xl border border-[#d6e4f0] rounded-lg w-full max-w-4xl">
+    <div class="flex flex-col md:flex-row items-stretch">
+
+      <form class="w-full md:w-6/12 p-8 bg-[#ebf5fb] flex flex-col items-center justify-center gap-6"
+        [formGroup]="Login" (ngSubmit)="onSubmit()">
+        <h2 class="text-3xl font-bold text-center text-[#4a90e2]">Inicio de Sesión</h2>
+        <p class="text-center text-sm text-[#7f99af]">
+          Inicia sesión para gestionar países con nosotros.
+        </p>
+        <div class="w-full flex flex-col gap-4">
+          <div class="flex flex-col gap-1">
+            <label for="email" class="text-[#4a90e2] font-medium">Correo Electrónico</label>
+            <input id="email" type="email" pInputText formControlName="email"
+              class="w-full p-2 border border-[#b0cce1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4a90e2]" />
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <label for="password" class="text-[#4a90e2] font-medium">Contraseña</label>
+            <input id="password" type="password" pInputText formControlName="password"
+              class="w-full p-2 border border-[#b0cce1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4a90e2]" />
+          </div>
+        </div>
+        <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+          [hideTransitionOptions]="'1000ms'" />
+        <p-button label="Iniciar Sesión" pRipple class="w-full"
+          styleClass="bg-[#4caf50] hover:bg-[#388e3c] text-white font-semibold text-lg py-2 px-4 rounded-lg transition-all duration-300"
+          type="submit">
+        </p-button>
+      </form>
+
+      <div class="w-full md:w-6/12 bg-[#ffffff] flex flex-col items-center justify-center p-8 text-center">
+        <h3 class="text-lg font-bold text-[#4a90e2] mb-2">¿Nuevo por aquí?</h3>
+        <p class="text-sm text-[#7f99af] mb-4">
+          Regístrate para comenzar a gestionar países en nuestro sistema.
+        </p>
+        <p-button pRipple label="Crear Cuenta" class="w-full max-w-[15rem]"
+          styleClass="bg-[#4caf50] hover:bg-[#388e3c] text-white font-semibold text-lg py-2 px-4 rounded-lg transition-all duration-300"
+          (click)="onSignUp()">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</div>

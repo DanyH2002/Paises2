@@ -1,1 +1,71 @@
-<p>register works!</p>
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#ebf5fb] to-[#ffffff]">
+  <div class="card shadow-xl border border-[#d6e4f0] rounded-lg w-full max-w-4xl">
+    <div class="flex flex-col md:flex-row items-stretch">
+
+      <form class="w-full md:w-6/12 p-8 bg-[#ebf5fb] flex flex-col items-center justify-center gap-6"
+        [formGroup]="Registro" (ngSubmit)="onSubmit()">
+        <h2 class="text-2xl font-bold text-center text-[#4a90e2]">Formulario de Registro</h2>
+        <p class="text-center text-sm text-[#7f99af]">Crea una cuenta para comenzar a gestionar países con nosotros.</p>
+        <div class="w-full flex flex-col gap-4">
+
+          <div class="flex flex-col gap-1">
+            <label for="name" class="text-[#4a90e2] font-medium">Nombre</label>
+            <input id="name" type="text" pInputText formControlName="name"
+              class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-2 focus:ring-[#4a90e2] focus:outline-none" />
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <label for="last_name" class="text-[#4a90e2] font-medium">Apellido</label>
+            <input id="last_name" type="text" pInputText formControlName="last_name"
+              class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-2 focus:ring-[#4a90e2] focus:outline-none" />
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <label for="email" class="text-[#4a90e2] font-medium">Correo Electrónico</label>
+            <input id="email" type="email" pInputText formControlName="email"
+              class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-2 focus:ring-[#4a90e2] focus:outline-none" />
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <label for="password" class="text-[#4a90e2] font-medium">Contraseña</label>
+            <input id="password" type="password" pInputText formControlName="password"
+              class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-2 focus:ring-[#4a90e2] focus:outline-none" />
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <label for="phone" class="text-[#4a90e2] font-medium">Teléfono</label>
+            <input id="phone" type="text" pInputText formControlName="phone"
+              class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-2 focus:ring-[#4a90e2] focus:outline-none" />
+          </div>
+
+          <div class="flex flex-col gap-1">
+            <label for="gender" class="text-[#4a90e2] font-medium">Género</label>
+            <p-dropdown formControlName="gender" [options]="gender" optionLabel="name" placeholder="Selecciona género">
+            </p-dropdown>
+          </div>
+
+          <div class="mb-4">
+            <label for="birthday" class="block text-[#4a90e2] font-medium mb-2">Fecha de Cumpleaños</label>
+            <p-datepicker formControlName="birthday" dateFormat="yy-mm-dd"
+              placeholder="Selecciona la fecha"></p-datepicker>
+          </div>
+        </div>
+
+        <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+          [hideTransitionOptions]="'1000ms'" />
+        <p-button label="Crear Cuenta" pRipple icon="pi pi-user-plus" class="w-full"
+          styleClass="bg-[#4a90e2] hover:bg-[#388e3c] text-white font-semibold text-lg py-2 px-4 rounded-lg transition-all duration-300"
+          type="submit">
+        </p-button>
+      </form>
+
+      <div class="w-full md:w-6/12 bg-[#ffffff] flex flex-col items-center justify-center p-8 text-center">
+        <h3 class="text-lg font-bold text-[#4a90e2] mb-2">¿Ya tienes una cuenta?</h3>
+        <p class="text-sm text-[#7f99af] mb-4">Inicia sesión para gestionar países con nosotros.</p>
+        <p-button pRipple label="Iniciar Sesión" icon="pi pi-sign-in" severity="info" class="w-full max-w-[15rem]"
+          styleClass="bg-[#4a90e2] border-none hover:bg-[#6ca0dc] text-white font-semibold text-lg" (click)="onLogin()">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</div>
