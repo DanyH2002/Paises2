@@ -1,1 +1,101 @@
-<p>forms works!</p>
+<p-confirmDialog></p-confirmDialog>
+<div class="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#ebf5fb] to-[#ffffff] p-4">
+  <div class="card shadow-lg border border-[#d6e4f0] rounded-lg w-full max-w-4xl p-8 bg-[#ebf5fb]">
+    <h2 class="text-2xl font-bold text-center text-[#4a90e2] mb-6">Gestión de País</h2>
+    <p-toast></p-toast>
+
+    <form [formGroup]="countryForm" (ngSubmit)="isEditing ? actualizar() : crear()" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="name" class="block text-[#4a90e2] font-medium mb-2">Nombre Oficial</label>
+          <input id="name" type="text" pInputText formControlName="name"
+            class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-[#4a90e2] focus:ring-2 focus:outline-none" />
+        </div>
+        <div>
+          <label for="president" class="block text-[#4a90e2] font-medium mb-2">Presidente</label>
+          <input id="president" type="text" pInputText formControlName="president"
+            class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-[#4a90e2] focus:ring-2 focus:outline-none" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="size" class="block text-[#4a90e2] font-medium mb-2">Tamaño (km²)</label>
+          <input id="size" type="number" pInputText formControlName="size"
+            class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-[#4a90e2] focus:ring-2 focus:outline-none" />
+        </div>
+        <div>
+          <label for="population" class="block text-[#4a90e2] font-medium mb-2">Población</label>
+          <input id="population" type="number" pInputText formControlName="population"
+            class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-[#4a90e2] focus:ring-2 focus:outline-none" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label for="language" class="block text-[#4a90e2] font-medium mb-2">Idioma</label>
+          <input id="language" type="text" pInputText formControlName="language"
+            class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-[#4a90e2] focus:ring-2 focus:outline-none" />
+        </div>
+        <div>
+          <label for="currency" class="block text-[#4a90e2] font-medium mb-2">Moneda</label>
+          <input id="currency" type="text" pInputText formControlName="currency"
+            class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-[#4a90e2] focus:ring-2 focus:outline-none" />
+        </div>
+      </div>
+
+      <div>
+        <label for="flag" class="block text-[#4a90e2] font-medium mb-2">URL de la Bandera</label>
+        <input id="flag" type="url" pInputText formControlName="flag"
+          class="w-full p-2 border border-[#b0cce1] rounded-lg focus:ring-[#4a90e2] focus:ring-2 focus:outline-none" />
+        <div class="mt-4">
+          <p>Vista previa de la bandera:</p>
+          <img [src]="countryForm.value.flag" alt="Vista previa de la bandera"
+            class="w-32 h-20 object-cover border mt-2" />
+        </div>
+      </div>
+
+      <div>
+        <label for="region_id" class="block text-[#4a90e2] font-medium mb-2">Región</label>
+        <p-select formControlName="region_id" [options]="regions" optionLabel="code" optionValue="id"
+          placeholder="Selecciona una región">
+        </p-select>
+      </div>
+
+      <div class="flex justify-between space-x-4 mt-6">
+        <p-button label="{{ isEditing ? 'Actualizar' : 'Guardar' }}" pRipple type="submit"
+          [icon]="isEditing ? 'pi pi-pencil' : 'pi pi-save'"
+          [styleClass]="isEditing ? 'bg-yellow-500 hover:bg-yellow-600 text-white font-semibold text-lg' : 'bg-blue-500 hover:bg-blue-600 text-white font-semibold text-lg'">
+        </p-button>
+
+        <p-button *ngIf="isEditing" label="Eliminar" pRipple icon="pi pi-trash"
+          styleClass="bg-red-500 hover:bg-red-600 text-white font-semibold text-lg" (click)="eliminar($event)">
+        </p-button>
+
+        <p-button label="Lista" pRipple
+        styleClass="bg-red-500 hover:bg-red-600 text-white font-semibold text-lg" (click)="volverALista()">
+      </p-button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card shadow-lg border border-[#d6e4f0] rounded-lg w-full max-w-md p-6 bg-[#ffffff]">
+    <h2 class="text-lg font-bold text-center text-[#4a90e2] mb-4">Regiones Disponibles</h2>
+    <p-table [value]="regions" class="p-datatable-gridlines">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nombre</th>
+          <th>Código</th>
+          <th>Descripción</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-region>
+        <tr>
+          <td>{{ region.name }}</td>
+          <td>{{ region.code }}</td>
+          <td>{{ region.descripcion }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

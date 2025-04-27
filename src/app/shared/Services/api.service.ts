@@ -31,9 +31,13 @@ export class ApiService {
     return this.http.put<any>(`${this.apiUrl}/${Module}${this.accionValor(Accion)}/${id}`, data);
   }
 
-  deleteItem(Module: string, id: number, Accion: string = ''): Observable<any> {
+  deleteItem(Module: string, id: any, Accion: string = ''): Observable<any> {
     let AccionValor = Accion != '' ? `/${Accion}` : '';
     return this.http.delete<any>(`${this.apiUrl}/${Module}${this.accionValor(Accion)}/${id}`);
+  }
+
+  delete(Module: string, id: number, data: any): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${Module}/${id}`, { body: data });
   }
 
   accionValor(Accion: string) {
@@ -46,6 +50,7 @@ export class ApiService {
         // Si la petición es exitosa, elimina los datos almacenados en localStorage
         localStorage.removeItem('token');
         localStorage.removeItem('id');
+        localStorage.removeItem('name');
         console.log('Sesión cerrada y datos eliminados del localStorage.');
       }),
       catchError((error) => {
