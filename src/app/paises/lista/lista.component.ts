@@ -24,20 +24,24 @@ export class ListaComponent implements OnInit {
     this.api.getItems('countries', 'list').subscribe({
       next: (response: any) => {
         console.log('Countries loaded:', response);
-        if (response && response.data && Array.isArray(response.data)) {
-          this.countries = response.data.map((country: any) => ({
-            id: country.id,
-            name: country.name,
-            president: country.president,
-            image: country.flag,
-            region_id: country.region_id,
-            region_name: country.region_name,
-            user_id: country.user_id,
-            user_name: country.user_name,
-          }));
-          console.log('Processed countries:', this.countries);
+        if (response.success === true) {
+          if (response && response.data && Array.isArray(response.data)) {
+            this.countries = response.data.map((country: any) => ({
+              id: country.id,
+              name: country.name,
+              president: country.president,
+              image: country.flag,
+              region_id: country.region_id,
+              region_name: country.region_name,
+              user_id: country.user_id,
+              user_name: country.user_name,
+            }));
+            console.log('Processed countries:', this.countries);
+          } else {
+            console.error('Error: Unexpected response structure.');
+          }
         } else {
-          console.error('Error: Unexpected response structure.');
+          console.error('Error: Failed to load countries.');
         }
       },
 

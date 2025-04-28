@@ -34,13 +34,19 @@ export class LoginComponent {
       this.api.postItem('login', this.Login.value).subscribe({
         next: (response) => {
           console.log(response);
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('id', response.id);
-          localStorage.setItem('name', response.name);
-          this.message.add({ severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
-          setTimeout(() => {
-            this.router.navigateByUrl('/menu');
-          }, 2500);
+          if (response.success) {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('id', response.id);
+            localStorage.setItem('name', response.name);
+            this.message.add({ severity: 'success', summary: 'Éxito', detail: 'Inicio de sesión exitoso' });
+            setTimeout(() => {
+              this.router.navigateByUrl('/menu');
+            }, 2000);
+          } else{
+            console.error("Error al iniciar sesión", response.message);
+            this.message.add({ severity: 'error', summary: 'Error', detail: response.message });
+          }
+
         },
         error: (error) => {
           console.error("Error al iniciar sesión", error);

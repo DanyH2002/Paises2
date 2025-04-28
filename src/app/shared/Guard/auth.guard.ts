@@ -12,8 +12,6 @@ export const authGuard: CanActivateFn = (route, state) => {
     token = localStorage.getItem('token');
     id = localStorage.getItem('id');
     name = localStorage.getItem('name');
-
-    console.log("Guard - Ejecutando en el servidor. No se puede acceder a localStorage");
   }
   if (!token) {
     const router = inject(Router);

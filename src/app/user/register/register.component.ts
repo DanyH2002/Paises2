@@ -64,10 +64,19 @@ export class RegisterComponent implements OnInit {
         {
           next: (response) => {
             console.log(response);
-            this.message.add({ severity: 'success', summary: 'Registro exitoso', detail: 'Usuario registrado correctamente' });
-            setTimeout(() => {
-              this.router.navigateByUrl('/login');
-            }, 2500);
+            if (response.success) {
+              localStorage.setItem('token', response.token);
+              localStorage.setItem('id', response.id);
+              localStorage.setItem('name', response.name);
+              this.message.add({ severity: 'success', summary: 'Registro exitoso', detail: 'Usuario registrado correctamente' });
+              setTimeout(() => {
+                this.router.navigateByUrl('/menu');
+              }, 2000);
+            } else {
+              console.error("Error al registrar el usuario", response.message);
+              this.message.add({ severity: 'error', summary: 'Error', detail: response.message });
+            }
+
           },
           error: (error) => {
             console.error(error);
