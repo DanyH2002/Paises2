@@ -1,6 +1,6 @@
 # Paises
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5. with nvm version 22.13.1.
 
 ## Development server
 
